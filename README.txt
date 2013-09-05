@@ -4,6 +4,7 @@ WEH - World of Elemental Heroes
 	- 
 
 2.- Types
+	- Darkness (Earth, Water) vs Light (Fire, Air)
 	- Elemental hero
 	- Chimera
 	- Fairy
@@ -23,16 +24,16 @@ WEH - World of Elemental Heroes
 	- Earth
 	- Water
 
-5.- Secondary Elements
+    Secondary Elements
 	- Hot (Air - Fire)
 	- Dry (Fire - Earth)
 	- Wet (Earth - Water)
 	- Cold (Water - Air)
 
-6.- Spirit Element
-	- the main element but is gained
+    Spirit Element
+	- the main element but is gained (God of game provide this according to determination in the battles)
 
-6.- Map
+7.- Map
 	- All elemental heroes need a home to live
 		- Fire = Volcano, Mountain
 		- Air = Cloud
