@@ -1,5 +1,5 @@
 
-#include "Game.h"
+#include "model/Game.h"
 
 using namespace game::model;
 

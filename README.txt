@@ -3,8 +3,8 @@ WEH - World of Elemental Heroes
 1.- Levels
 	- 
 
-2.- Types
-	- Darkness (Earth, Water) vs Light (Fire, Air)
+2.- Elements
+	- Darkness Team (Earth, Water) vs Light Team (Fire, Air)
 	- Elemental hero
 	- Chimera
 	- Fairy
@@ -33,13 +33,15 @@ WEH - World of Elemental Heroes
     Spirit Element
 	- the main element but is gained (God of game provide this according to determination in the battles)
 
-7.- Map
+5.- Map
 	- All elemental heroes need a home to live
 		- Fire = Volcano, Mountain
 		- Air = Cloud
 		- Earth = Mountain, Desert
 		- Water = Ocean, Waterfall
+	- Ground affects ability of elemental heroes (improve/worsen damage, life)
 	- 
+
 
 Reference:
 	http://en.wikipedia.org/wiki/Classical_element

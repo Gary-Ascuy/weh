@@ -14,8 +14,6 @@
 				<Compiler>
 					<Add option="-g" />
 					<Add directory="./include" />
-					<Add directory="./include/model" />
-					<Add directory="./include/gui" />
 				</Compiler>
 			</Target>
 			<Target title="Release">
@@ -37,9 +35,11 @@
 		</Compiler>
 		<Unit filename="include/gui/GUIGame.h" />
 		<Unit filename="include/model/Game.h" />
+		<Unit filename="include/model/Map.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="src/gui/GUIGame.cpp" />
 		<Unit filename="src/model/Game.cpp" />
+		<Unit filename="src/model/Map.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />

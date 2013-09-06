@@ -1,9 +1,8 @@
 
 #include <iostream>
 
-#include "NS.h"
-#include "Game.h"
-#include "GUIGame.h"
+#include "model/Game.h"
+#include "gui/GUIGame.h"
 
 using namespace std;
 using namespace game::model;
@@ -11,7 +10,7 @@ using namespace game::gui;
 
 int main()
 {
-    Game game;
+    //Game game;
     GUIGame guiGame;
     return 0;
 }

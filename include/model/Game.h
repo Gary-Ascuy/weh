@@ -14,4 +14,5 @@ namespace game { namespace model {
             Game();
     };
 }}
+
 #endif // GAME_H_INCLUDED
