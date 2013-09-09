@@ -20,7 +20,7 @@
 					<Add option="-lmingw32 -lSDL2main -lSDL2  -mwindows  -lm -ldinput8 -ldxguid -ldxerr8 -luser32 -lgdi32 -lwinmm -limm32 -lole32 -loleaut32 -lshell32 -lversion -luuid -static-libgcc -lSDL2_image -lSDL2_ttf" />
 				</Linker>
 				<ExtraCommands>
-					<Add before="mkdir output" />
+					<Add before="mkdir -p output" />
 				</ExtraCommands>
 			</Target>
 			<Target title="Release">
@@ -36,7 +36,7 @@
 					<Add option="-s" />
 				</Linker>
 				<ExtraCommands>
-					<Add before="mkdir output" />
+					<Add before="mkdir -p output" />
 				</ExtraCommands>
 			</Target>
 		</Build>
