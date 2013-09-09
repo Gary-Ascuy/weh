@@ -24,3 +24,5 @@
 # Project directories
 /obj/*
 /bin/*
+/output/*
+/backups/*
