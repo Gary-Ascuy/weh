@@ -1,6 +1,6 @@
 
-#ifndef GAME_H_INCLUDED
-#define GAME_H_INCLUDED
+#ifndef MODEL__GAME_H_INCLUDED
+#define MODEL__GAME_H_INCLUDED
 
 #include <stdio.h>
 
@@ -15,4 +15,4 @@ namespace game { namespace model {
     };
 }}
 
-#endif // GAME_H_INCLUDED
+#endif // MODEL__GAME_H_INCLUDED

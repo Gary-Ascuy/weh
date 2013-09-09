@@ -1,6 +1,6 @@
 
-#ifndef ELEMENTAL_H_INCLUDED
-#define ELEMENTAL_H_INCLUDED
+#ifndef MODEL__ELEMENTAL_H_INCLUDED
+#define MODEL__ELEMENTAL_H_INCLUDED
 
 namespace game { namespace model {
 
@@ -13,4 +13,4 @@ namespace game { namespace model {
 
 }}
 
-#endif // ELEMENTAL_H_INCLUDED
+#endif // MODEL__ELEMENTAL_H_INCLUDED

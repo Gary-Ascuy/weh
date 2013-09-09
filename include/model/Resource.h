@@ -1,6 +1,6 @@
 
-#ifndef RESOURCEID_H_INCLUDED
-#define RESOURCEID_H_INCLUDED
+#ifndef MODEL__RESOURCE_H_INCLUDED
+#define MODEL__RESOURCE_H_INCLUDED
 
 #include <SDL2\SDL.h>
 #include <SDL2\SDL_stdinc.h>
@@ -24,4 +24,4 @@ namespace game { namespace model {
 
 }}
 
-#endif // RESOURCEID_H_INCLUDED
+#endif // MODEL__RESOURCE_H_INCLUDED

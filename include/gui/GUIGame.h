@@ -1,6 +1,6 @@
 
-#ifndef GUIGAME_H_INCLUDED
-#define GUIGAME_H_INCLUDED
+#ifndef GUI__GUIGAME_H_INCLUDED
+#define GUI__GUIGAME_H_INCLUDED
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
@@ -39,4 +39,4 @@ namespace game { namespace gui {
 
 }}
 
-#endif // GUIGAME_H_INCLUDED
+#endif // GUI__GUIGAME_H_INCLUDED

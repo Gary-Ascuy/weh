@@ -1,6 +1,6 @@
 
-#ifndef LOG_H_INCLUDED
-#define LOG_H_INCLUDED
+#ifndef MODEL__LOG_H_INCLUDED
+#define MODEL__LOG_H_INCLUDED
 
 #include <iostream>
 #include <sstream>
@@ -21,4 +21,4 @@ namespace game { namespace model {
 
 }}
 
-#endif // LOG_H_INCLUDED
+#endif // MODEL__LOG_H_INCLUDED
