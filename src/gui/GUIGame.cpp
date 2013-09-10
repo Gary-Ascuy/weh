@@ -60,6 +60,7 @@ GUIGame& GUIGame::Loop() {
     auto running = true;
 
     SDL_Event event;
+    TimeController time(30.0);
     while (running) {
         while (SDL_PollEvent(&event)) {
             switch (event.type) {
@@ -77,10 +78,15 @@ GUIGame& GUIGame::Loop() {
         SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
         SDL_RenderClear(renderer);
         SDL_RenderPresent(renderer);
+        time.Wait();
     }
     return *this;
 }
 
 int GUIGame::Success() {
     return WEH_SUCCESS;
+}
+
+SDL_Renderer * GUIGame::Renderer() {
+    return renderer;
 }

@@ -15,6 +15,7 @@
 
 #include "global.h"
 #include "model/Log.h"
+#include "gui/TimeController.h"
 
 using namespace std;
 using namespace game::model;
@@ -29,6 +30,8 @@ namespace game { namespace gui {
         GUIGame& Load();
         GUIGame& Loop();
         int Success();
+
+        SDL_Renderer * Renderer();
 
     private:
         void Initialize(const string& title, Sint16 width, Sint16 height, Uint32 window_mode, Uint32 render_mode);

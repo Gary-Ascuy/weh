@@ -12,6 +12,11 @@ using namespace game::gui;
 using namespace game::model;
 
 /**
+ * Log level
+ **/
+LogLevel Log::MinLevel = WEH_LOG_FINEST;
+
+/**
  * SDL Entry Point
  **/
 int main(int carg, char ** varg) {

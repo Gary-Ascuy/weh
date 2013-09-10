@@ -4,6 +4,8 @@
 using namespace game::model;
 
 void Log::Write(ostream& out, const string& message, LogLevel level) {
+    if (level > Log::MinLevel) return;
+
     time_t now; time(&now);
     char buffer[80];
     struct tm * timeinfo;
@@ -16,6 +18,7 @@ void Log::Write(ostream& out, const string& message, LogLevel level) {
         case WEH_LOG_WARNING: out << "WARNING"; break;
         case WEH_LOG_INFO: out << "INFO"; break;
         case WEH_LOG_FINE: out << "FINE"; break;
+        case WEH_LOG_FINEST: out << "FINEST"; break;
         default: out << "UNKNOWN";
     }
     out << " > " << message << endl;
