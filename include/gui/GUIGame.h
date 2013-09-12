@@ -16,6 +16,8 @@
 #include "global.h"
 #include "model/Log.h"
 #include "gui/TimeController.h"
+#include "model/Resource.h"
+#include "gui/ResourceManager.h"
 
 using namespace std;
 using namespace game::model;
@@ -38,6 +40,8 @@ namespace game { namespace gui {
 
         SDL_Window * window = NULL;
         SDL_Renderer * renderer = NULL;
+
+        ResourceManager rm;
     };
 
 }}

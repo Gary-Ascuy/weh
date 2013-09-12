@@ -46,6 +46,8 @@
 		</Compiler>
 		<Unit filename="include/global.h" />
 		<Unit filename="include/gui/GUIGame.h" />
+		<Unit filename="include/gui/ResourceManager.h" />
+		<Unit filename="include/gui/Sprite.h" />
 		<Unit filename="include/gui/TimeController.h" />
 		<Unit filename="include/main.h" />
 		<Unit filename="include/model/Elemental.h" />
@@ -54,7 +56,12 @@
 		<Unit filename="include/model/Map.h" />
 		<Unit filename="include/model/Resource.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="resource.rc">
+			<Option compilerVar="WINDRES" />
+		</Unit>
 		<Unit filename="src/gui/GUIGame.cpp" />
+		<Unit filename="src/gui/ResourceManager.cpp" />
+		<Unit filename="src/gui/Sprite.cpp" />
 		<Unit filename="src/gui/TimeController.cpp" />
 		<Unit filename="src/model/Game.cpp" />
 		<Unit filename="src/model/Log.cpp" />

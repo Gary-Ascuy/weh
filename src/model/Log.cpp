@@ -35,6 +35,20 @@ void Log::Write(const string& message, LogLevel level) {
     }
 }
 
+void Log::Write(initializer_list<string> messages, initializer_list<string> tags, LogLevel level) {
+    stringstream ss;
+    for (auto& tag : tags) ss << "[" << tag << "]";
+    ss << " ";
+    for (auto& message : messages) ss << message;
+    Log::Write(ss.str(), level);
+}
+
+void Log::Write(initializer_list<string> messages, LogLevel level) {
+    stringstream ss;
+    for (auto& message : messages) ss << message;
+    Log::Write(ss.str(), level);
+}
+
 void Log::WriteErr(const string& message, const string& cause, LogLevel level) {
     Write(message + " - By: " + cause, level);
 }

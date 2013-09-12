@@ -2,6 +2,7 @@
 #ifndef MODEL__LOG_H_INCLUDED
 #define MODEL__LOG_H_INCLUDED
 
+#include <initializer_list>
 #include <iostream>
 #include <sstream>
 #include <ctime>
@@ -16,6 +17,8 @@ namespace game { namespace model {
     public:
         static void Write(ostream& out, const string& message, LogLevel level = WEH_LOG_INFO);
         static void Write(const string& message, LogLevel level = WEH_LOG_INFO);
+        static void Write(initializer_list<string> messages, LogLevel level = WEH_LOG_INFO);
+        static void Write(initializer_list<string> messages, initializer_list<string> tags, LogLevel level = WEH_LOG_INFO);
         static void WriteErr(const string& message, const string& cause, LogLevel level = WEH_LOG_ERROR);
 
         static LogLevel MinLevel;

@@ -4,6 +4,8 @@
 
 #include <vector>
 #include <iostream>
+#include <sstream>
+#include <fstream>
 
 #include "model/Resource.h"
 
@@ -11,32 +13,27 @@ using namespace std;
 
 namespace game { namespace model {
 
-    /**
-     * Manage information about the map
-     */
-    class IMapIterator {
-        public:
-            virtual bool operator()(Uint16 c, Uint16 r, const ResourceID& element) = 0;
-    };
-
     class Map
     {
-        private:
-            Uint16 rows;
-            Uint16 cols;
-            vector< vector<ResourceID> > elements;
-
-            Map& Start(Uint16 cols, Uint16 rows);
-
         public:
+            Map();
             Map(Uint16 cols, Uint16 rows, Uint8 w = 64, Uint8 h = 16);
 
-            Map& Iterate(IMapIterator& iterator);
-            Map& Set(Uint16 col, Uint16 row, ResourceID resorce);
-            ResourceID& Get(Uint16 col, Uint16 row) const;
+            Map& Set(Uint16 col, Uint16 row, SpriteID id);
+            SpriteID Get(Uint16 col, Uint16 row);
+            Map& LoadFromFile(const string& path);
 
             Uint16 Cols();
             Uint16 Rows();
+
+
+            Map& Start(Uint16 cols, Uint16 rows);
+
+        protected:
+            vector< vector<SpriteID> > elements;
+
+            Uint16 rows;
+            Uint16 cols;
     };
 
 }}
