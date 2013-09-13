@@ -28,6 +28,7 @@ class Character
     public:
         Character();
 
+        Character& Start(Uint16 x, Uint16 y);
         Character& Src(Uint16 x, Uint16 y);
         Character& Dst(Uint16 x, Uint16 y);
 

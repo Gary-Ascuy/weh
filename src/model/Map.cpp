@@ -27,6 +27,7 @@ Map& Map::Set(Uint16 col, Uint16 row, SpriteID resorce) {
     if (col >= 0 && col < cols && row >= 0 && row < rows) {
         elements[col][row] = resorce;
     }
+    return *this;
 }
 
 SpriteID Map::Get(Uint16 col, Uint16 row) {

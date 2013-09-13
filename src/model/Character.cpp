@@ -5,6 +5,16 @@ Character::Character()
 {
 }
 
+
+Character& Character::Start(Uint16 x, Uint16 y) {
+    dst.x = x;
+    dst.y = y;
+
+    src.x = x;
+    src.y = y;
+    return *this;
+}
+
 Character& Character::Src(Uint16 x, Uint16 y) {
     src.x = x;
     src.y = y;

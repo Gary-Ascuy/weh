@@ -64,10 +64,6 @@ GUIGame& GUIGame::Load() {
     return *this;
 }
 
-bool isIN(int x, int xx, int ww) {
-    return x >= xx && x <= (xx + ww);
-}
-
 GUIGame& GUIGame::Loop() {
     auto running = true;
 
@@ -82,9 +78,17 @@ GUIGame& GUIGame::Loop() {
 
     // player
     GUICharacter player(9);
-    player.Src(240, 240).Dst(240, 240);
+    GUICharacter player2(10);
+    GUICharacter player3(11);
+    GUICharacter player4(12);
+
+    player.Start(240, 240);
+    player2.Start(340, 240);
+    player3.Start(440, 240);
+    player4.Start(540, 240);
 
     SDL_Point mouse;
+    SDL_Point selectionStart;
     SDL_Event event;
     TimeController time(25.0);
     while (running) {
@@ -102,11 +106,29 @@ GUIGame& GUIGame::Loop() {
                     switch (event.button.button) {
                         case SDL_BUTTON_LEFT:
                             selecting = false;
-                            player.Status(WEH_CHARACTER_STATUS_SELECTED);
+                            player.Select(selection);
+                            player2.Select(selection);
+                            player3.Select(selection);
+                            player4.Select(selection);
                             break;
                         case SDL_BUTTON_RIGHT:
+                            int sc = 0;
+                            int df = 16;
                             if (player.Is(WEH_CHARACTER_STATUS_SELECTED)) {
                                 player.Dst(event.button.x - viewport.x, event.button.y - viewport.y);
+                                sc++;
+                            }
+                            if (player2.Is(WEH_CHARACTER_STATUS_SELECTED)) {
+                                player2.Dst(event.button.x - viewport.x + sc * df, event.button.y - viewport.y + sc * df);
+                                sc++;
+                            }
+                            if (player3.Is(WEH_CHARACTER_STATUS_SELECTED)) {
+                                player3.Dst(event.button.x - viewport.x + sc * df, event.button.y - viewport.y + sc * df);
+                                sc++;
+                            }
+                            if (player4.Is(WEH_CHARACTER_STATUS_SELECTED)) {
+                                player4.Dst(event.button.x - viewport.x + sc * df, event.button.y - viewport.y + sc * df);
+                                sc++;
                             }
                             break;
                     }
@@ -115,13 +137,16 @@ GUIGame& GUIGame::Loop() {
                     switch (event.button.button) {
                         case SDL_BUTTON_LEFT:
                             selecting = true;
+                            player.Status(WEH_CHARACTER_STATUS_SELECTED, true);
+                            player2.Status(WEH_CHARACTER_STATUS_SELECTED, true);
+                            player3.Status(WEH_CHARACTER_STATUS_SELECTED, true);
+                            player4.Status(WEH_CHARACTER_STATUS_SELECTED, true);
                             selection = { event.button.x, event.button.y, 0, 0 };
                             break;
                         case SDL_BUTTON_RIGHT:
                             break;
                         case SDL_BUTTON_MIDDLE:
                             break;
-
                     }
                     break;
                 case SDL_MOUSEMOTION:
@@ -135,7 +160,7 @@ GUIGame& GUIGame::Loop() {
         }
 
         /* MOUSE */
-        int viewInc = 3;
+        int viewInc = 4;
         if (mouse.x < 50) {
             int ddx = (50 - mouse.x)/5 + viewInc;
             viewport.x += ddx;
@@ -164,6 +189,10 @@ GUIGame& GUIGame::Loop() {
 
         map.Render(viewport.x, viewport.y, rm);
         player.Render(viewport, rm);
+        player2.Render(viewport, rm);
+        player3.Render(viewport, rm);
+        player4.Render(viewport, rm);
+
         if (selecting) rm.RenderCharacter(&selection, select);
 
         SDL_RenderPresent(renderer);

@@ -78,6 +78,7 @@ void GUICharacter::Render(SDL_Rect& viewport, ResourceManager& rm) {
     }
 }
 
-SDL_Rect * GUICharacter::Block() {
-    return &playerRect;
+void GUICharacter::Select(SDL_Rect& selection) {
+    if (WEH_IS_RINR(selection, playerRect) || WEH_IS_RINR(playerRect, selection))
+        Status(WEH_CHARACTER_STATUS_SELECTED);
 }
