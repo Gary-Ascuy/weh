@@ -18,6 +18,8 @@
 #include "gui/TimeController.h"
 #include "model/Resource.h"
 #include "gui/ResourceManager.h"
+#include "gui/GUIMap.h"
+#include "gui/GUICharacter.h"
 
 using namespace std;
 using namespace game::model;
@@ -38,10 +40,16 @@ namespace game { namespace gui {
     private:
         void Initialize(const string& title, Sint16 width, Sint16 height, Uint32 window_mode, Uint32 render_mode);
 
+    private:
+        Sint16 width;
+        Sint16 height;
+
         SDL_Window * window = NULL;
         SDL_Renderer * renderer = NULL;
 
         ResourceManager rm;
+        GUIMap map;
+        SDL_Rect viewport;
     };
 
 }}

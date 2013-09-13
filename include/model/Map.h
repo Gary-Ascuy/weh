@@ -8,6 +8,7 @@
 #include <fstream>
 
 #include "model/Resource.h"
+#include "model/Log.h"
 
 using namespace std;
 
@@ -25,7 +26,6 @@ namespace game { namespace model {
 
             Uint16 Cols();
             Uint16 Rows();
-
 
             Map& Start(Uint16 cols, Uint16 rows);
 

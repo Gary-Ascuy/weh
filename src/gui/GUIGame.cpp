@@ -20,6 +20,8 @@ GUIGame::~GUIGame() {
 
 void GUIGame::Initialize(const string& title, Sint16 width, Sint16 height, Uint32 window_mode, Uint32 render_mode) {
     Log::Write("Inicializing SDL, IMG, TTF, renderer and window");
+    this -> width = width;
+    this -> height = height;
 
     // Init all SDL systems
     if (SDL_Init(WEH_INIT_SDL) < 0) {
@@ -57,6 +59,8 @@ GUIGame& GUIGame::Load() {
     Log::Write({"Start loading resources"}, {"resources"});
     rm.Load(renderer, "resources\\map.sprite", "resources\\character.sprite");
     Log::Write({"End loading resources"}, {"resources"});
+
+    map.LoadFromFile("resources\\wild-world.map");
     return *this;
 }
 
@@ -67,7 +71,7 @@ bool isIN(int x, int xx, int ww) {
 GUIGame& GUIGame::Loop() {
     auto running = true;
 
-    SpriteID player = { 0, 0, 0 };
+    SpriteID playerId = { 0, 0, 0 };
     SpriteID aura = { 1, 0, 0 };
     SpriteID circle = { 2, 0, 0 };
     SpriteID grass = { 4, 1, 0 };
@@ -89,10 +93,20 @@ GUIGame& GUIGame::Loop() {
     int sssy = s.y;
     int ssry = r.y;
 
+    viewport.x = 0;
+    viewport.y = 0;
+
     bool enable = true;
     bool fire = false;
+
+    SDL_Point mouse;
+
     SDL_Event event;
-    TimeController time(10.0);
+    TimeController time(25.0);
+    GUICharacter player;
+    player.Src(240, 240);
+    player.Dst(240, 240);
+
     while (running) {
         while (SDL_PollEvent(&event)) {
             switch (event.type) {
@@ -104,6 +118,14 @@ GUIGame& GUIGame::Loop() {
                     }
                     break;
                 case SDL_QUIT: running = false; break;
+                case SDL_MOUSEBUTTONUP:
+                    switch (event.button.button) {
+                        case SDL_BUTTON_RIGHT:
+                            // if (selectable) { }
+                            player.Dst(event.button.x - viewport.x, event.button.y - viewport.y);
+                            break;
+                    }
+                    break;
                 case SDL_MOUSEBUTTONDOWN:
                     switch (event.button.button) {
                         case SDL_BUTTON_LEFT:
@@ -119,33 +141,61 @@ GUIGame& GUIGame::Loop() {
                         case SDL_BUTTON_MIDDLE:
                             fire = !fire;
                             break;
+
                     }
+                    break;
+                case SDL_MOUSEMOTION:
+                    mouse.x = event.motion.x;
+                    mouse.y = event.motion.y;
+                    //player.Dst(event.motion.x, event.motion.y);
                     break;
             }
         }
 
+
+        /* MOUSE */
+        int viewInc = 3;
+        if (mouse.x < 50) {
+            int ddx = (50 - mouse.x)/5 + viewInc;
+            viewport.x += ddx;
+            if (viewport.x > 0) viewport.x = 0;
+        }
+        if (mouse.x > width - 50) {
+            int ddx = (50 - (width - mouse.x))/5 + viewInc;
+            viewport.x -= ddx;
+            int max = (25 * 16 + 64 + 16) - 1024;
+            if (viewport.x < max) viewport.x = max;
+        }
+        if (mouse.y < 50) {
+            int ddx = (50 - mouse.y)/5 + viewInc;
+            viewport.y += ddx;
+            if (viewport.y > 0) viewport.y = 0;
+        }
+        if (mouse.y > height - 50) {
+            int ddx = (50 - (height - mouse.y))/5 + viewInc;
+            viewport.y -= ddx;
+            int max = (72 * 16 + 16 - 64) - 768;
+            if (viewport.y < -max) viewport.y = -max;
+        }
+
+
+
+        index++;
         SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
         SDL_RenderClear(renderer);
 
-        for (int i=0;i<100;i++) {
-            g.y = -60 + (i * 16);
-            for (int j=0;j<100;j++) {
-                g.x = ((i%2) * -32) + (j * 64);
-                rm.RenderMap(&g, grass);
-            }
-        }
-
-        index++;
-        if (enable) rm.RenderMap(&s, circle);
+        map.Render(viewport.x, viewport.y, rm);
+        player.Render(viewport, rm);
+        //if (enable) rm.RenderCharacter(&s, circle);
         circle.row = index % 10;
 
-        player.row = 2;
-        player.col = index % 4;
-        rm.RenderMap(&x, player);
+        playerId.row = 2;
+        playerId.col = index % 4;
+        //rm.RenderCharacter(&x, playerId);
 
         aura.row = 1;
         aura.col = index % 4;
-        if (fire) rm.RenderMap(&r, aura);
+        //if (fire) rm.RenderCharacter(&r, aura);
 
         int delta = (index % 200) * 4;
         x.x = ssx + delta;

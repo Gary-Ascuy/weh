@@ -36,6 +36,7 @@ SpriteID Map::Get(Uint16 col, Uint16 row) {
 Map& Map::LoadFromFile(const string& path) {
     ifstream file(path, ifstream::in);
 
+    Log::Write({"Loading map from ", path}, {"map"});
     int w = -1; int h = -1;
     int c = -1; int r = -1;
     Sint64 value; string line;

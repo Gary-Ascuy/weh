@@ -16,8 +16,8 @@ namespace game { namespace model {
     } SpriteID, *LPSpriteID;
 
     typedef union _SpriteIDLoader {
-        Uint32 value;
         SpriteID sprite;
+        Uint32 value;
     } SpriteIDLoader, *LPSpriteIDLoader;
 
 }}
