@@ -21,8 +21,14 @@
 *.out
 *.app
 
+# Resource files
+*.png
+*.map
+*.sprite
+
 # Project directories
 /obj/*
 /bin/*
 /output/*
 /backups/*
+/resources/*
