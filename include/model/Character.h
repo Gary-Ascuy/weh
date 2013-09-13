@@ -19,18 +19,20 @@
 #include "gui/ResourceManager.h"
 #include "gui/GUIMap.h"
 
-
 #define WEH_CHARACTER_STATUS_SELECTED   1
 #define WEH_CHARACTER_STATUS_WALKING    2
 #define WEH_CHARACTER_STATUS_FIRE       4
-
 
 class Character
 {
     public:
         Character();
+
         Character& Src(Uint16 x, Uint16 y);
         Character& Dst(Uint16 x, Uint16 y);
+
+        Uint16 Status(Uint16 flags, bool erase = false);
+        Uint16 Is(Uint16 flags);
 
     protected:
         SDL_Point src;

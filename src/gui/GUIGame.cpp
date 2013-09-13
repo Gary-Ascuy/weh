@@ -71,42 +71,22 @@ bool isIN(int x, int xx, int ww) {
 GUIGame& GUIGame::Loop() {
     auto running = true;
 
-    SpriteID playerId = { 0, 0, 0 };
-    SpriteID aura = { 1, 0, 0 };
-    SpriteID circle = { 2, 0, 0 };
-    SpriteID grass = { 4, 1, 0 };
+    //Select fields
+    SDL_Rect selection;
+    bool selecting = false;
+    SpriteID select = { 8, 0, 0 };
 
-    SDL_Rect g = { 0, 0, 64, 64 };
-    SDL_Rect r = { 0, 0, 100, 110 };
-    SDL_Rect x = { 32, 72, 32, 32 };
-    SDL_Rect s = { -73, 36, 204, 134 };
-    SDL_Rect ss = { 0, 0, 204, 134 };
-    SDL_Rect sf = { 0, 0, 204, 134 };
-
-    int index = 0;
-
-    int ssx = x.x;
-    int sss = s.x;
-    int ssr = r.x;
-
-    int ssxy = x.y;
-    int sssy = s.y;
-    int ssry = r.y;
-
+    // viewport
     viewport.x = 0;
     viewport.y = 0;
 
-    bool enable = true;
-    bool fire = false;
+    // player
+    GUICharacter player(9);
+    player.Src(240, 240).Dst(240, 240);
 
     SDL_Point mouse;
-
     SDL_Event event;
     TimeController time(25.0);
-    GUICharacter player;
-    player.Src(240, 240);
-    player.Dst(240, 240);
-
     while (running) {
         while (SDL_PollEvent(&event)) {
             switch (event.type) {
@@ -120,26 +100,26 @@ GUIGame& GUIGame::Loop() {
                 case SDL_QUIT: running = false; break;
                 case SDL_MOUSEBUTTONUP:
                     switch (event.button.button) {
+                        case SDL_BUTTON_LEFT:
+                            selecting = false;
+                            player.Status(WEH_CHARACTER_STATUS_SELECTED);
+                            break;
                         case SDL_BUTTON_RIGHT:
-                            // if (selectable) { }
-                            player.Dst(event.button.x - viewport.x, event.button.y - viewport.y);
+                            if (player.Is(WEH_CHARACTER_STATUS_SELECTED)) {
+                                player.Dst(event.button.x - viewport.x, event.button.y - viewport.y);
+                            }
                             break;
                     }
                     break;
                 case SDL_MOUSEBUTTONDOWN:
                     switch (event.button.button) {
                         case SDL_BUTTON_LEFT:
-                            if (isIN(event.button.x, x.x, x.w) && isIN(event.button.y, x.y, x.h)) {
-                                enable = !enable;
-                            }
+                            selecting = true;
+                            selection = { event.button.x, event.button.y, 0, 0 };
                             break;
                         case SDL_BUTTON_RIGHT:
-                            x.y = ssxy + event.button.y;
-                            s.y = sssy + event.button.y;
-                            r.y = ssry + event.button.y;
                             break;
                         case SDL_BUTTON_MIDDLE:
-                            fire = !fire;
                             break;
 
                     }
@@ -147,11 +127,12 @@ GUIGame& GUIGame::Loop() {
                 case SDL_MOUSEMOTION:
                     mouse.x = event.motion.x;
                     mouse.y = event.motion.y;
-                    //player.Dst(event.motion.x, event.motion.y);
+
+                    selection.w = abs(event.motion.x - selection.x);
+                    selection.h = abs(event.motion.y - selection.y);
                     break;
             }
         }
-
 
         /* MOUSE */
         int viewInc = 3;
@@ -178,29 +159,12 @@ GUIGame& GUIGame::Loop() {
             if (viewport.y < -max) viewport.y = -max;
         }
 
-
-
-        index++;
         SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
         SDL_RenderClear(renderer);
 
         map.Render(viewport.x, viewport.y, rm);
         player.Render(viewport, rm);
-        //if (enable) rm.RenderCharacter(&s, circle);
-        circle.row = index % 10;
-
-        playerId.row = 2;
-        playerId.col = index % 4;
-        //rm.RenderCharacter(&x, playerId);
-
-        aura.row = 1;
-        aura.col = index % 4;
-        //if (fire) rm.RenderCharacter(&r, aura);
-
-        int delta = (index % 200) * 4;
-        x.x = ssx + delta;
-        s.x = sss + delta;
-        r.x = ssr + delta;
+        if (selecting) rm.RenderCharacter(&selection, select);
 
         SDL_RenderPresent(renderer);
         time.Wait();
