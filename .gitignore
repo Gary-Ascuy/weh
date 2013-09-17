@@ -25,6 +25,7 @@
 *.png
 *.map
 *.sprite
+*.cscope_file_list
 
 # Project directories
 /obj/*

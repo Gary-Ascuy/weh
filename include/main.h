@@ -2,6 +2,11 @@
 #ifndef MAIN_H_INCLUDED
 #define MAIN_H_INCLUDED
 
+#include "global.h"
+#include "gui/GUIGame.h"
+
+#include "ilog/Logger.h"
+
 #define WEH_UPDATE_STD_OUTPUTS
 #define WEH_FILE_MODE "a"
 #define WEH_FILE_MODE_CLEAN "wt"

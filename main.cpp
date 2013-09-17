@@ -3,10 +3,6 @@
 #include <stdlib.h>
 
 #include "main.h"
-#include "global.h"
-#include "gui/GUIGame.h"
-
-#include "ilog/Logger.h"
 
 /**
  * Log level
