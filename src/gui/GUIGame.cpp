@@ -4,41 +4,37 @@
 using namespace game::gui;
 
 GUIGame::GUIGame(const string& title, Sint16 width, Sint16 height, Uint32 window_mode, Uint32 render_mode) {
-    stringstream message;
-    message << title << " -Size=" << width << "x" << height;
-    message << " -WindowMode=" << window_mode << " -RenderMode=" << render_mode;
-    Log::Write(message.str());
-
+    iLogger(iINFO << title << " -Size=" << width << "x" << height << " -WindowMode=" << window_mode << " -RenderMode=" << render_mode);
     Initialize(title, width, height, window_mode, render_mode);
 }
 
 GUIGame::~GUIGame() {
-    Log::Write("Destroying renderer and window");
+    iLogger(iINFO << "Destroying renderer and window");
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
 }
 
 void GUIGame::Initialize(const string& title, Sint16 width, Sint16 height, Uint32 window_mode, Uint32 render_mode) {
-    Log::Write("Inicializing SDL, IMG, TTF, renderer and window");
+    iLogger(iINFO << "Inicializing SDL, IMG, TTF, renderer and window");
     this -> width = width;
     this -> height = height;
 
     // Init all SDL systems
     if (SDL_Init(WEH_INIT_SDL) < 0) {
-        Log::WriteErr("Error initializing SDL", SDL_GetError());
+        iLogger(iERROR << "Error initializing SDL" << SDL_GetError());
         SDL_Quit();
         exit(WEH_ERR_SDL);
     } else atexit(SDL_Quit);
 
     // Init img system
     if (IMG_Init(WEH_INIT_IMG) < 0) {
-        Log::WriteErr("Error initializing IMG", IMG_GetError());
+        iLogger(iERROR << "Error initializing IMG" << IMG_GetError());
         exit(WEH_ERR_IMG);
     } else atexit(IMG_Quit);
 
     // Init ttf system
     if (TTF_Init() < 0) {
-        Log::WriteErr("Error initializing TTF", TTF_GetError());
+        iLogger(iERROR << "Error initializing TTF" << TTF_GetError());
         exit(WEH_ERR_TTF);
     } else atexit(TTF_Quit);
 
@@ -48,17 +44,16 @@ void GUIGame::Initialize(const string& title, Sint16 width, Sint16 height, Uint3
     renderer = SDL_CreateRenderer(window, -1, render_mode);
 
     if (!window || !renderer) {
-        Log::WriteErr("Error initializing Windows and Render", SDL_GetError());
+        iLogger(iERROR << "Error initializing Windows and Render" << SDL_GetError());
         exit(WEH_ERR_WIN);
     }
 }
 
 GUIGame& GUIGame::Load() {
-    Log::Write("Loading resources (IMG, FONT)");
-
-    Log::Write({"Start loading resources"}, {"resources"});
+    iLogger(iINFO << "Loading resources (IMG, FONT)");
+    iLogger(iINFO << iTAGS({"resources"}) << "Loading resources (IMG, FONT)");
     rm.Load(renderer, "resources\\map.sprite", "resources\\character.sprite");
-    Log::Write({"End loading resources"}, {"resources"});
+    iLogger(iINFO << iTAGS({"resources"}) << "End loading resources");
 
     map.LoadFromFile("resources\\wild-world.map");
     return *this;
@@ -71,6 +66,14 @@ GUIGame& GUIGame::Loop() {
     SDL_Rect selection;
     bool selecting = false;
     SpriteID select = { 8, 0, 0 };
+
+    SpriteID menu = { 13, 0, 0 };
+    SpriteID menu2 = { 14, 0, 0 };
+    SDL_Rect menuRect = { width - 190, height - 184, 190, 184 };
+    SDL_Rect menuRect2 = { 0, height - 184, width - 190, 184 };
+
+    SpriteID button = { 16, 0, 0 };
+    SDL_Rect buttonRect = { 10, height - 35, 30, 30 };
 
     // viewport
     viewport.x = 0;
@@ -155,6 +158,7 @@ GUIGame& GUIGame::Loop() {
 
                     selection.w = abs(event.motion.x - selection.x);
                     selection.h = abs(event.motion.y - selection.y);
+                    //if (WEH_IS_DINR( buttonRect, mouse.x, mouse.y )) button.row = 0; else button.row = 1;
                     break;
             }
         }
@@ -194,6 +198,10 @@ GUIGame& GUIGame::Loop() {
         player4.Render(viewport, rm);
 
         if (selecting) rm.RenderCharacter(&selection, select);
+
+        rm.RenderCharacter(&menuRect, menu);
+        rm.RenderCharacter(&menuRect2, menu2);
+        rm.RenderCharacter(&buttonRect, button);
 
         SDL_RenderPresent(renderer);
         time.Wait();

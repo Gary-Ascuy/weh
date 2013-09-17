@@ -10,6 +10,8 @@
 #include "model/Resource.h"
 #include "gui/Sprite.h"
 
+#include "ilog/Logger.h"
+
 #define WHE_MAP_CATALOG_CODE "character.sprite"
 #define WHE_CHARACTER_CATALOG_CODE "map.sprite"
 

@@ -13,7 +13,6 @@
 #include <stdlib.h>
 
 #include "global.h"
-#include "model/Log.h"
 #include "gui/TimeController.h"
 #include "model/Resource.h"
 #include "gui/ResourceManager.h"

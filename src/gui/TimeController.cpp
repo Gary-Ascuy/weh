@@ -34,10 +34,5 @@ void TimeController::CPU(Uint32 consumedTime) {
 }
 
 void TimeController::LogCPUStatus(Uint32 consumedTime) {
-    stringstream ss;
-    ss << "[" << setfill('0') << setw(15) << ticks << "]" << " Frame";
-    ss << " -CPU:" <<  setiosflags(ios::fixed) << setprecision(5) << (cpu * 100) << "%";
-    ss << " -TIME:" << consumedTime << "/" << deltaTime;
-    ss << " -FPS:" << fps;
-    Log::Write(ss.str(), WEH_LOG_FINEST);
+    iIF(iLEVEL_FINEST) iLogger(iFINEST << iTAGS({"frame"}) << " -CPU:" << (cpu * 100) << "% -TIME:" << consumedTime << "/" << deltaTime << " -FPS:" << fps);
 }

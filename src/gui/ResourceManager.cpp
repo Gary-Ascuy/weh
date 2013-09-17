@@ -22,14 +22,14 @@ ResourceManager& ResourceManager::LoadCatalog(const string& path, const string& 
     Uint16 cols; Uint16 rows;
     Uint16 sw; Uint16 sh;
 
-    Log::Write({"Loading catalog from ", path}, {"catalog", code});
+    iLogger(iINFO << iTAGS({"catalog", code}) << "Loading catalog from " << path);
     ifstream file(path, ifstream::in);
     while (file >> name >> cols >> rows >> sw >> sh) {
         resources[code].push_back(Sprite());
         resources[code].back().LoadCtteSprite(name, renderer, cols, rows, sw, sh);
     }
     file.close();
-    Log::Write({"Completed loading from", path}, {"catalog", code});
+    iLogger(iINFO << iTAGS({"catalog", code}) << "Completed loading from " << path);
     return *this;
 }
 

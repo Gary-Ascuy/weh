@@ -18,7 +18,7 @@ Sprite& Sprite::LoadCtteSprite(const string& path, SDL_Renderer * renderer, Uint
     this -> w = sw; this -> h = sh;
     this -> path = path;
 
-    Log::Write({"Sprite loaded from ", path}, {"sprite"});
+    iLogger(iINFO << iTAGS({"sprite"}) << "Sprite loaded from " << path);
     texture = IMG_LoadTexture(renderer, path.c_str());
 
     rects.resize(cols);
@@ -79,7 +79,5 @@ Uint16 Sprite::H() {
 }
 
 void Sprite::LogRect(SDL_Rect& rect) {
-    stringstream ss;
-    ss << setw(10) << rect.x << setw(10) << rect.y << setw(10) << rect.h << setw(10) << rect.w;
-    Log::Write(ss.str(), WEH_LOG_FINEST);
+    iLogger(iFINEST << setw(10) << rect.x << setw(10) << rect.y << setw(10) << rect.h << setw(10) << rect.w);
 }

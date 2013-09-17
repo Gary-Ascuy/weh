@@ -13,11 +13,10 @@
 #include <iomanip>
 #include <vector>
 
-#include "model/Log.h"
+#include "ilog/Logger.h"
 
 using namespace std;
 //using namespace game::gui;
-using namespace game::model;
 
 namespace game { namespace gui {
     class Sprite {

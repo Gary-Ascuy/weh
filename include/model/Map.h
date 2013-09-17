@@ -8,7 +8,7 @@
 #include <fstream>
 
 #include "model/Resource.h"
-#include "model/Log.h"
+#include "ilog/Logger.h"
 
 using namespace std;
 

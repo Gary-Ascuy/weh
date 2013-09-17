@@ -3,11 +3,11 @@
 
 #include "model/Character.h"
 
-
 #define WEH_IS_DINR(r, px, py) (px >= r.x && px < (r.x + r.w) && py >= r.y && py < (r.y + r.h))
 #define WEH_IS_RINR(a, b) WEH_IS_DINR(a, b.x, b.y) || WEH_IS_DINR(a, b.x + b.w, b.y) || WEH_IS_DINR(a, b.x, b.y + b.h) || WEH_IS_DINR(a, b.x + b.w, b.y + b.h)
 
 using namespace game::model;
+
 namespace game { namespace gui {
 
     class GUICharacter : public Character

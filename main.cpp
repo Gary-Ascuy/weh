@@ -7,6 +7,8 @@
 #include "model/Log.h"
 #include "gui/GUIGame.h"
 
+#include "ilog/Logger.h"
+
 using namespace std;
 using namespace game::gui;
 using namespace game::model;
@@ -14,7 +16,7 @@ using namespace game::model;
 /**
  * Log level
  **/
-LogLevel Log::MinLevel = WEH_LOG_FINEST;
+iLOGGER_MIN_LEVEL = iLEVEL_INFO;
 
 /**
  * SDL Entry Point
@@ -38,5 +40,5 @@ void change_std_outputs() {
  * Exit from application
  **/
 void weh_exit() {
-    Log::Write("Ending Application");
+    iLogger(iINFO << "Ending Application");
 }

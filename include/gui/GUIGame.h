@@ -14,12 +14,13 @@
 #include <stdlib.h>
 
 #include "global.h"
-#include "model/Log.h"
 #include "gui/TimeController.h"
 #include "model/Resource.h"
 #include "gui/ResourceManager.h"
 #include "gui/GUIMap.h"
 #include "gui/GUICharacter.h"
+
+#include "ilog/Logger.h"
 
 using namespace std;
 using namespace game::model;

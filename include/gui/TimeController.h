@@ -9,9 +9,8 @@
 #include <iomanip>
 
 #include "global.h"
-#include "model/Log.h"
 
-using namespace game::model;
+#include "ilog/Logger.h"
 
 namespace game { namespace gui {
 

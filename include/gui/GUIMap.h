@@ -13,11 +13,12 @@
 #include <stdlib.h>
 
 #include "global.h"
-#include "model/Log.h"
 #include "gui/TimeController.h"
 #include "model/Resource.h"
 #include "model/Map.h"
 #include "gui/ResourceManager.h"
+
+#include "ilog/Logger.h"
 
 using namespace game::model;
 
