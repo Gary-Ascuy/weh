@@ -9,22 +9,12 @@
 #define WEH_STDOUT "output\\stdout.txt"
 #define WEH_STDERR "output\\stderr.txt"
 
-/**
- * Exit Applicaition
- **/
-void weh_exit();
-
-/**
- * Change standar outputs
- **/
-void change_std_outputs();
-
 #ifdef WEH_UPDATE_STD_OUTPUTS
-#define UPDATE_STD_OUTPUTS change_std_outputs()
+#define UPDATE_STD_OUTPUTS freopen(WEH_STDOUT, WEH_FILE_MODE_CLEAN, stdout); freopen(WEH_STDERR, WEH_FILE_MODE_CLEAN, stderr);
 #else
 #define UPDATE_STD_OUTPUTS
 #endif
 
-#define QUEUE_UP atexit(weh_exit);
+#define QUEUE_UP atexit([] { iLogger(iINFO << "Ending Application"); });
 
 #endif // MAIN_H_INCLUDED
