@@ -1,15 +1,15 @@
 
-#ifndef EXCP_NETEXCEPTION_H_INCLUDED
-#define EXCP_NETEXCEPTION_H_INCLUDED
+#ifndef EXCP__GUIEXCEPTION_H_INCLUDED
+#define EXCP__GUIEXCEPTION_H_INCLUDED
 
 #include<string>
 #include<exception>
 
 namespace game { namespace excp {
 
-    class NetException : std::exception {
+    class GuiException : std::exception {
     public:
-        NetException(const std::string& cause) : cause(cause) { }
+        GuiException(const std::string& cause) : cause(cause) { }
         virtual const char* what() const throw() override { return cause.c_str(); }
 
     private:
@@ -18,4 +18,4 @@ namespace game { namespace excp {
 
 }}
 
-#endif // EXCP_NETEXCEPTION_H_INCLUDED
+#endif // EXCP__GUIEXCEPTION_H_INCLUDED

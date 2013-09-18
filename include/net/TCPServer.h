@@ -8,7 +8,7 @@
 #include "ilog/Logger.h"
 
 using namespace std;
-using namespace game::exception;
+using namespace game::excp;
 
 namespace game { namespace net {
 

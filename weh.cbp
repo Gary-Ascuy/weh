@@ -9,7 +9,7 @@
 			<Target title="Debug">
 				<Option output="bin/Debug/weh" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/Debug/" />
-				<Option type="1" />
+				<Option type="0" />
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-std=c++11" />
@@ -45,8 +45,10 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="include/excp/GuiException.h" />
 		<Unit filename="include/excp/NetException.h" />
 		<Unit filename="include/global.h" />
+		<Unit filename="include/gui/Environment.h" />
 		<Unit filename="include/gui/GUICharacter.h" />
 		<Unit filename="include/gui/GUIGame.h" />
 		<Unit filename="include/gui/GUIMap.h" />
@@ -62,10 +64,12 @@
 		<Unit filename="include/model/Resource.h" />
 		<Unit filename="include/net/Socket.h" />
 		<Unit filename="include/net/TCPServer.h" />
+		<Unit filename="include/optionparser.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="resource.rc">
 			<Option compilerVar="WINDRES" />
 		</Unit>
+		<Unit filename="src/gui/Environment.cpp" />
 		<Unit filename="src/gui/GUICharacter.cpp" />
 		<Unit filename="src/gui/GUIGame.cpp" />
 		<Unit filename="src/gui/GUIMap.cpp" />

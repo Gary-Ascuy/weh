@@ -43,5 +43,5 @@ void Logger::Write(std::ostream& out, Log& log, const std::string& level) {
     strftime(buffer, 80, "%Y-%m-%d %H:%M:%S", timeinfo);
     out << "[" << buffer << "] " << level << " > ";
     log.Write(out);
-    out  << std::endl;
+    out << std::endl;
 }
