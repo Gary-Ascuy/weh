@@ -19,7 +19,7 @@ if not exist %OUTPUT_DIRECTORY% (
 
 :: Excecute program
 if exist %APP_PATH% (
-	%GAME% -l5 -o
+	%GAME% -o %*
 ) else (
 	echo Application not found !! %APP_PATH%
 )

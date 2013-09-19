@@ -103,7 +103,6 @@ namespace game { namespace cmd {
     }
 }}
 
-
 /**
  * Using namespaces
  */
