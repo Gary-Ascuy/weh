@@ -11,6 +11,11 @@
 
 #include "ilog/Logger.h"
 #include "excp/GuiException.h"
+#include "excp/NetException.h"
+#include "net/TCPServer.h"
+#include "net/Socket.h"
+
+#include "gui/GUIGame.h"
 
 /**
  * Library modes
@@ -36,7 +41,7 @@ namespace game { namespace gui {
     public:
         Environment(uint16_t systems, Uint32 sdl_flags = WEH_INIT_SDL, int img_flags = WEH_INIT_IMG);
         ~Environment();
-        Environment& Run();
+        Environment& Run(Settings& settings);
         int Success();
 
     private:

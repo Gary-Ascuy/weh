@@ -3,7 +3,8 @@
 
 using namespace game::gui;
 
-GUIGame::GUIGame(const string& title, Sint16 width, Sint16 height, Uint32 window_mode, Uint32 render_mode) {
+GUIGame::GUIGame(xGame * game, const string& title, Sint16 width, Sint16 height, Uint32 window_mode, Uint32 render_mode) {
+    this -> game = game;
     iLogger(iINFO << title << " -Size=" << width << "x" << height << " -WindowMode=" << window_mode << " -RenderMode=" << render_mode);
     Initialize(title, width, height, window_mode, render_mode);
 }
@@ -18,25 +19,6 @@ void GUIGame::Initialize(const string& title, Sint16 width, Sint16 height, Uint3
     iLogger(iINFO << "Inicializing SDL, IMG, TTF, renderer and window");
     this -> width = width;
     this -> height = height;
-
-    // Init all SDL systems
-    if (SDL_Init(WEH_INIT_SDL) < 0) {
-        iLogger(iERROR << "Error initializing SDL" << SDL_GetError());
-        SDL_Quit();
-        exit(WEH_ERR_SDL);
-    } else atexit(SDL_Quit);
-
-    // Init img system
-    if (IMG_Init(WEH_INIT_IMG) < 0) {
-        iLogger(iERROR << "Error initializing IMG" << IMG_GetError());
-        exit(WEH_ERR_IMG);
-    } else atexit(IMG_Quit);
-
-    // Init ttf system
-    if (TTF_Init() < 0) {
-        iLogger(iERROR << "Error initializing TTF" << TTF_GetError());
-        exit(WEH_ERR_TTF);
-    } else atexit(TTF_Quit);
 
     // creating windows and render
     window = SDL_CreateWindow(title.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
@@ -91,7 +73,7 @@ GUIGame& GUIGame::Loop() {
     player4.Start(540, 240);
 
     SDL_Point mouse;
-    SDL_Point selectionStart;
+    //SDL_Point selectionStart;
     SDL_Event event;
     TimeController time(25.0);
     while (running) {
@@ -118,8 +100,14 @@ GUIGame& GUIGame::Loop() {
                             int sc = 0;
                             int df = 16;
                             if (player.Is(WEH_CHARACTER_STATUS_SELECTED)) {
-                                player.Dst(event.button.x - viewport.x, event.button.y - viewport.y);
-                                sc++;
+                                //player.Dst(, );
+                                //sc++;
+                                game -> Lock();
+                                game -> p.x = event.button.x - viewport.x;
+                                game -> p.y = event.button.y - viewport.y;
+                                game -> lastUpdate++;
+                                iLogger(iINFO << iTAGS({"client", "gui"}) << "Needs update from SDL_BUTTON_RIGHT");
+                                game -> Unlock();
                             }
                             if (player2.Is(WEH_CHARACTER_STATUS_SELECTED)) {
                                 player2.Dst(event.button.x - viewport.x + sc * df, event.button.y - viewport.y + sc * df);
@@ -193,15 +181,20 @@ GUIGame& GUIGame::Loop() {
 
         map.Render(viewport.x, viewport.y, rm);
         player.Render(viewport, rm);
-        player2.Render(viewport, rm);
-        player3.Render(viewport, rm);
-        player4.Render(viewport, rm);
+        //player2.Render(viewport, rm);
+        //player3.Render(viewport, rm);
+        //player4.Render(viewport, rm);
 
         if (selecting) rm.RenderCharacter(&selection, select);
 
         rm.RenderCharacter(&menuRect, menu);
         rm.RenderCharacter(&menuRect2, menu2);
         rm.RenderCharacter(&buttonRect, button);
+
+        // UPDATE
+        game -> Lock();
+        player.Dst(game -> p.x, game -> p.y);
+        game -> Unlock();
 
         SDL_RenderPresent(renderer);
         time.Wait();
