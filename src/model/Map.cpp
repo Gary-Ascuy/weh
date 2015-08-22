@@ -6,12 +6,12 @@ using namespace game::model;
 Map::Map() {
 }
 
-Map::Map(Uint16 cols, Uint16 rows, Uint8 w, Uint8 h)
+Map::Map(uint16_t cols, uint16_t rows, uint8_t w, uint8_t h)
 {
     Start(cols, rows);
 }
 
-Map& Map::Start(Uint16 cols, Uint16 rows) {
+Map& Map::Start(uint16_t cols, uint16_t rows) {
     this -> cols = cols;
     this -> rows = rows;
 
@@ -23,24 +23,24 @@ Map& Map::Start(Uint16 cols, Uint16 rows) {
     return *this;
 }
 
-Map& Map::Set(Uint16 col, Uint16 row, SpriteID resorce) {
+Map& Map::Set(uint16_t col, uint16_t row, SpriteID resorce) {
     if (col >= 0 && col < cols && row >= 0 && row < rows) {
         elements[col][row] = resorce;
     }
     return *this;
 }
 
-SpriteID Map::Get(Uint16 col, Uint16 row) {
+SpriteID Map::Get(uint16_t col, uint16_t row) {
     return elements[col][row];
 }
 
 Map& Map::LoadFromFile(const string& path) {
     ifstream file(path, ifstream::in);
 
-    iLogger(iINFO << iTAGS({"map"}) << "Loading map from " << path);
+    iLogger(iINFO << iTAGS({"map"}) << "Loading map from gary" << path);
     int w = -1; int h = -1;
     int c = -1; int r = -1;
-    Sint64 value; string line;
+    int64_t value; string line;
 
     SpriteIDLoader loader;
     while (file.good()) {
@@ -70,11 +70,11 @@ Map& Map::LoadFromFile(const string& path) {
     return *this;
 }
 
-Uint16 Map::Cols() {
+uint16_t Map::Cols() {
     return cols;
 }
 
-Uint16 Map::Rows() {
+uint16_t Map::Rows() {
     return rows;
 }
 

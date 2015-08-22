@@ -23,8 +23,8 @@
  */
 #define WEH_FILE_MODE "a"
 #define WEH_FILE_MODE_CLEAN "wt"
-#define WEH_STDOUT "output\\stdout.txt"
-#define WEH_STDERR "output\\stderr.txt"
+#define WEH_STDOUT "output/stdout.txt"
+#define WEH_STDERR "output/stderr.txt"
 #define UPDATE_STD_OUTPUTS freopen(WEH_STDOUT, WEH_FILE_MODE_CLEAN, stdout); freopen(WEH_STDERR, WEH_FILE_MODE_CLEAN, stderr);
 
 #define APPLICATION_LOG iLogger(iINFO << "Starting Application"); atexit([] { iLogger(iINFO << "Ending Application"); });
@@ -102,7 +102,7 @@ namespace game { namespace cmd {
     }
 
     void command_line_interface(int length, char ** values, game::gui::Settings& settings) {
-        UPDATE_STD_OUTPUTS;
+        //UPDATE_STD_OUTPUTS;
         length-=(length>0); values+=(length>0);
 
         option::Stats stats(game::cmd::usage, length, values);

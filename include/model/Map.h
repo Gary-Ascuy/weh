@@ -18,22 +18,22 @@ namespace game { namespace model {
     {
         public:
             Map();
-            Map(Uint16 cols, Uint16 rows, Uint8 w = 64, Uint8 h = 16);
+            Map(uint16_t cols, uint16_t rows, uint8_t w = 64, uint8_t h = 16);
 
-            Map& Set(Uint16 col, Uint16 row, SpriteID id);
-            SpriteID Get(Uint16 col, Uint16 row);
+            Map& Set(uint16_t col, uint16_t row, SpriteID id);
+            SpriteID Get(uint16_t col, uint16_t row);
             Map& LoadFromFile(const string& path);
 
-            Uint16 Cols();
-            Uint16 Rows();
+            uint16_t Cols();
+            uint16_t Rows();
 
-            Map& Start(Uint16 cols, Uint16 rows);
+            Map& Start(uint16_t cols, uint16_t rows);
 
         protected:
             vector< vector<SpriteID> > elements;
 
-            Uint16 rows;
-            Uint16 cols;
+            uint16_t rows;
+            uint16_t cols;
     };
 
 }}

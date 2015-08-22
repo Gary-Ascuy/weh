@@ -16,7 +16,6 @@
 #include "ilog/Logger.h"
 
 using namespace std;
-//using namespace game::gui;
 
 namespace game { namespace gui {
     class Sprite {

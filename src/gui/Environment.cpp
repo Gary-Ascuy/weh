@@ -65,6 +65,7 @@ int server_task_pull(void * data) {
             game -> Unlock();
         }
     }
+    return 0;
 }
 
 int server_attend_task(void * data) {
